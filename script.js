@@ -73,4 +73,14 @@ numInput.addEventListener('change', function(){
 	winningScoreDisplay.textContent = numInput.value;
 	winningScore = Number(numInput.value);
 	resetGame();
+	if (numInput.value <= 0) {
+		validation();
+	}
 });
+
+function validation () {
+	numInput.value = 1;
+	winningScore = 1;
+	winningScoreDisplay.textContent = numInput.value;
+	alert('Winning Score should be greater than 0');
+}
