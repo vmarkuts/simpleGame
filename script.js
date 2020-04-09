@@ -9,14 +9,13 @@ var darkMode = false;
 var pButton = [document.querySelector('#p1'),document.querySelector('#p2')];
 var pDisplay = [document.querySelector('#p1Display'),document.querySelector('#p2Display')];
 var pScores = [0,0];
+const players = 2;
 
-
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < players; i++) {
 	pButton[i].addEventListener('click', function() {
 		addScore(i);
 	});
 }
-
 
 winningScoreDisplay.textContent = winningScore;
 numInput.value = winningScore;
@@ -52,7 +51,7 @@ resetButton.addEventListener('click',function(){
 });
 
 function resetGame() {
-	for (var i = 0; i < 2; i++) {
+	for (var i = 0; i < players; i++) {
 		pScores[i] = 0;
 		pDisplay[i].textContent = pScores[i];
 		pDisplay[i].classList.remove('winner');
