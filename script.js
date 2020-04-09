@@ -1,16 +1,38 @@
-var p1Button = document.querySelector('#p1');
-var p2Button = document.querySelector('#p2');
-var p1Display = document.querySelector('#p1Display');
-var p2Display = document.querySelector('#p2Display');
 var resetButton = document.querySelector('#reset');
 var numInput = document.querySelector('input[type="number"]');
 var darkButton = document.querySelector('#darkMode');
 var allButtons = document.querySelectorAll('button');
-var p1Score = 0;
-var p2Score = 0;
+var winningScoreDisplay = document.querySelector('p span');
 var gameOver = false;
 var winningScore = 5;
 var darkMode = false;
+var pButton = [document.querySelector('#p1'),document.querySelector('#p2')];
+var pDisplay = [document.querySelector('#p1Display'),document.querySelector('#p2Display')];
+var pScores = [0,0];
+
+pButton[0].addEventListener('click', function(){
+		addScore(0);
+});
+
+pButton[1].addEventListener('click', function(){
+		addScore(1);
+});
+
+
+winningScoreDisplay.textContent = winningScore;
+numInput.value = winningScore;
+
+function addScore(playerNumber) {
+	if (!gameOver) {
+		pScores[playerNumber]++;
+		pDisplay[playerNumber].textContent = pScores[playerNumber];
+
+		if (pScores[playerNumber] === winningScore) {
+			pDisplay[playerNumber].classList.add('winner');
+			gameOver = true;
+		}
+	}
+}
 
 darkButton.addEventListener('click', function(){
 	darkMode = !darkMode;
@@ -24,48 +46,18 @@ darkButton.addEventListener('click', function(){
 	} else {
 		document.querySelector('#spanDarkMode').textContent = 'Turn On Dark Mode';
 	}
-	
 });
 
-var winningScoreDisplay = document.querySelector('p span');
-winningScoreDisplay.textContent = winningScore;
-numInput.value = winningScore;
-
-p1Button.addEventListener('click', function(){
-	if (!gameOver) {
-		p1Score++;
-		if (p1Score === winningScore) {
-			p1Display.classList.add('winner');
-			gameOver = true;
-		}
-		console.log(p1Score);
-		p1Display.textContent = p1Score;
-	}
-});
-
-p2Button.addEventListener('click', function(){
-	if (!gameOver) {
-		p2Score++;
-		if (p2Score === winningScore) {
-			p2Display.classList.add('winner');
-			gameOver = true;
-		}
-		console.log(p2Score);
-		p2Display.textContent = p2Score;
-	}
-});
-
-reset.addEventListener('click',function(){
+resetButton.addEventListener('click',function(){
 	resetGame();
 });
 
 function resetGame() {
-	p1Score = 0;
-	p2Score = 0;
-	p1Display.textContent = p1Score;
-	p2Display.textContent = p2Score;
-	p1Display.classList.remove('winner');
-	p2Display.classList.remove('winner');
+	for (var i = 0; i < 2; i++) {
+		pScores[i] = 0;
+		pDisplay[i].textContent = pScores[i];
+		pDisplay[i].classList.remove('winner');
+	}
 	gameOver = false;
 }
 
