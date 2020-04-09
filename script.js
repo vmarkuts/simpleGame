@@ -10,13 +10,12 @@ var pButton = [document.querySelector('#p1'),document.querySelector('#p2')];
 var pDisplay = [document.querySelector('#p1Display'),document.querySelector('#p2Display')];
 var pScores = [0,0];
 
-pButton[0].addEventListener('click', function(){
-		addScore(0);
-});
 
-pButton[1].addEventListener('click', function(){
-		addScore(1);
-});
+for (let i = 0; i < 2; i++) {
+	pButton[i].addEventListener('click', function() {
+		addScore(i);
+	});
+}
 
 
 winningScoreDisplay.textContent = winningScore;
